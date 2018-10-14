@@ -1,66 +1,33 @@
-<%@page import="model.*" contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
+<%--
+  Created by IntelliJ IDEA.
+  User: 33616
+  Date: 13/10/2018
+  Time: 15:21
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
 <head>
-    <title>Bootstrap Theme Company</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
+    <title>Accueil</title>
 </head>
 <body style="background-color: #eee">
 
+<div align="center" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
 
-<form method="get" action ="calcul">
-    <input type="submit" value="Nouveau calcul">
-</form>
+    <div id=typeOperation style="border:solid 5px;">
+        <form method="post" action="accueil">
+            Quel type d'exercice veux-tu réaliser ? <br><br>
+            <input type="radio" name="operation" value="+">Addition <br>
+            <input type="radio" name="operation" value="-">Soustraction <br>
+            <input type="radio" name="operation" value="x">Multiplication <br>
+            <input id="hasard" type="checkbox" name="opeHasard" value="random">nombres au hasard<br><br>
+            Quelle table veux-tu réviser ? <br><br>
+            <input type="number" name="tableAFaire" min="0" max="9"><br><br>
 
-<p>
-    <% if(request.getAttribute("calculAFaire")!=null)
-            {out.print(request.getAttribute("calculAFaire"));
-            }
-    %>
-</p>
-
-<form method="post" action="calcul">
-    <input type="number"name="reponseUser" title="Réponse" required/>
-
-    <input type="text" hidden
-           value="<% if ( request.getAttribute("calculAFaire")!= null){
-               out.print( request.getAttribute("calculAFaire"));
-           }    %>"
-           name="calculAFaire" >
-
-    <input type="number" hidden value="<% if ( request.getAttribute("correction")!= null){
-               out.print( request.getAttribute("correction"));
-           }    %>"  name="correction" >
-
-    <input type="number" hidden value="<% if ( request.getAttribute("essais")!= null){
-               out.print( request.getAttribute("essais"));
-           }    %>"  name="essais" >
-
-    <input type="submit">
-</form>
-
-<p>
-    <% if (request.getParameter("reponseUser")!=null){
-            if((request.getAttribute("correction")!=null || request.getAttribute("reponseUser") != null)&& (int) request.getAttribute("essais")>=3)
-                {out.print(request.getAttribute("correction"));
-                }
-        }
-
-    %>
-</p>
-<p>
-
-    <% if(request.getAttribute("resultat")!=null)
-    {out.print(request.getAttribute("resultat"));
-    }
-    %>
-</p>
+            <input type="submit" class="btn btn-danger" style="height: 35px;" value="Commencer">
+        </form>
+    </div>
+</div>
 
 </body>
-
-
 </html>

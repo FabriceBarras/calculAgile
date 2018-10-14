@@ -18,17 +18,28 @@ public class CalculServlet extends HttpServlet {
     private int correction;
     private String resultat;
     private int essais;
+    private  String operation;
+    private  String opeHasard;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Calcul calculGenere = new Calcul();
-        calculGenere.genereCalcul();
+        calculGenere.genereCalcul(req);
         calculAFaire= calculGenere.getCalculAFaire();
         correction = calculGenere.getCorrection();
+        essais = 0;
+
+        operation = req.getParameter("operation");
+        opeHasard = req.getParameter("opeHasard");
+
 
         req.setAttribute("calculAFaire",calculAFaire);
         req.setAttribute("correction",correction);
-        this.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        req.setAttribute("essais",essais);
+        req.setAttribute("operation",operation);
+        req.setAttribute("opeHasard",opeHasard);
+
+        this.getServletContext().getRequestDispatcher("/calcul.jsp").forward(req, resp);
     }
 
     @Override
@@ -38,6 +49,9 @@ public class CalculServlet extends HttpServlet {
 
         calculAFaire = req.getParameter("calculAFaire");
         int reponseUser = Integer.parseInt(req.getParameter("reponseUser"));
+        operation = req.getParameter("operation");
+        opeHasard = req.getParameter("opeHasard");
+
 
         correction = calculCorrige.getCorrection();
         resultat = calculCorrige.getResultat();
@@ -48,8 +62,10 @@ public class CalculServlet extends HttpServlet {
         req.setAttribute("correction",correction);
         req.setAttribute("resultat",resultat);
         req.setAttribute("essais",essais);
+        req.setAttribute("operation",operation);
+        req.setAttribute("opeHasard",opeHasard);
 
-        this.getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);
+        this.getServletContext().getRequestDispatcher("/calcul.jsp").forward(req, resp);
     }
 
     @Override

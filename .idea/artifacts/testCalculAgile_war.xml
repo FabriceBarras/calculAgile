@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="testCalculAgile:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="testCalculAgile-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="testCalculAgile:war exploded" />
+    </root>
+  </artifact>
+</component>
